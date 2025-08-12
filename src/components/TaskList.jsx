@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import TaskItem from './TaskItem'
+import TaskForm from './TaskForm'
 import {TaskPriority, TaskStatus} from "../utils/taskHelpers.js";
 
 
 const TaskList = () => {
+  const [showTaskForm, setShowTaskForm] = useState(false)
   const [tasks, setTasks] = useState([
     {
       id: '1',
@@ -70,6 +72,10 @@ const TaskList = () => {
     setTasks(prevTasks => prevTasks.filter(task => task.id !== taskId))
   }
 
+  const handleAddTask = (newTask) => {
+    setTasks(prevTasks => [newTask, ...prevTasks])
+  }
+
   const activeTasks = tasks.filter(task => task.status === TaskStatus.ACTIVE)
   const completedTasks = tasks.filter(task => task.status === TaskStatus.COMPLETED)
 
@@ -79,13 +85,22 @@ const TaskList = () => {
         <div className="col-12">
           <div className="d-flex justify-content-between align-items-center mb-4">
             <h2>Task Management</h2>
-            <div className="d-flex gap-3">
-              <span className="badge bg-primary fs-6">
-                Active: {activeTasks.length}
-              </span>
-              <span className="badge bg-success fs-6">
-                Completed: {completedTasks.length}
-              </span>
+            <div className="d-flex align-items-center gap-3">
+              <button
+                className="btn btn-primary"
+                onClick={() => setShowTaskForm(true)}
+              >
+                <i className="fas fa-plus me-2"></i>
+                Add New Task
+              </button>
+              <div className="d-flex gap-3">
+                <span className="badge bg-primary fs-6">
+                  Active: {activeTasks.length}
+                </span>
+                <span className="badge bg-success fs-6">
+                  Completed: {completedTasks.length}
+                </span>
+              </div>
             </div>
           </div>
 
@@ -125,6 +140,12 @@ const TaskList = () => {
               )}
             </>
           )}
+
+          <TaskForm
+            show={showTaskForm}
+            onHide={() => setShowTaskForm(false)}
+            onSubmit={handleAddTask}
+          />
         </div>
       </div>
     </div>
