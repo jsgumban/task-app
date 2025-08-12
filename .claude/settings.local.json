@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create:*)",
+      "Bash(rm:*)",
+      "Bash(npx create-vite:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
