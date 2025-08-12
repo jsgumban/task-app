@@ -1,4 +1,5 @@
 import React from 'react'
+import TaskList from './components/TaskList'
 
 function App() {
   return (
@@ -9,16 +10,17 @@ function App() {
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span className="navbar-toggler-icon"></span>
           </button>
+          <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav ms-auto">
+              <li className="nav-item">
+                <a className="nav-link active" href="#">Tasks</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </nav>
       
-      <div className="container mt-4">
-        <div className="row">
-          <div className="col-12">
-            <h1>Task App</h1>
-          </div>
-        </div>
-      </div>
+      <TaskList />
     </div>
   )
 }
